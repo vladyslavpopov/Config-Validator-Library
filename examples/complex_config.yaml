@@ -1,0 +1,23 @@
+app:
+  name: "SuperApp"
+  debug: true
+  ports:
+    - 8080
+    - 9000
+  metadata:
+    version: "1.0.0"
+    tags: ["production", "optimized"]
+
+database:
+  primary:
+    host: "db-primary.example.com"
+    credentials:
+      username: "admin"
+      password: "secret"
+  replica:
+    host: "db-replica.example.com"
+    enabled: false
+
+logging:
+  level: "INFO"
+  handlers: ["file", "console"]

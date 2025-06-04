@@ -1,0 +1,10 @@
+[app]
+name = "MyApp"
+port = 8081
+hosts = ["example.com", "api.example.com"]
+enable_backup = true
+backup_server = "backup.example.com"
+
+[database]
+host = "db.example.com"
+port = 5432
