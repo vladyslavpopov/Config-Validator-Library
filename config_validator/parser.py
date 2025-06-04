@@ -2,7 +2,7 @@ import json
 import yaml
 import toml
 from pathlib import Path
-from .exceptions import InvalidFileFormatError
+from config_validator.exceptions import InvalidFileFormatError
 
 def parse_config(file_path: str) -> dict:
     path = Path(file_path)
@@ -16,7 +16,11 @@ def parse_config(file_path: str) -> dict:
         with open(path, "r") as f:
             return yaml.safe_load(f)
     elif path.suffix == ".toml":
-        with open(path, "r") as f:
-            return toml.load(f)
+        try:
+            import toml
+            with open(path, "r", encoding="utf-8") as f:
+                return toml.load(f)
+        except ImportError:
+            raise ImportError("TOML support requires 'toml' package. Install with: pip install toml")
     else:
         raise InvalidFileFormatError("Unsupported file format. Use JSON, YAML, or TOML.")
